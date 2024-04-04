@@ -34,7 +34,7 @@
 
 .formRow {
   height: 15%;
-  margin-top: 10px;
+  margin: 10px 0px;
   display: flex;
   gap: 5%;
 }
@@ -46,7 +46,7 @@
 .formInput {
   height: 15%;
   width: 100%;
-  margin-top: 10px;
+  margin: 10px 0px;
   display: flex;
   flex-direction: column;
 }
@@ -57,12 +57,17 @@
 
 .formInput span {
   color: #11d0da;
-  padding-top: 1%;
+  margin-top: 1%;
   font-size: 1rem;
   font-family: "DM Sans", sans-serif;
   font-weight: 400;
   display: none;
 }
-.formInput input:invalid + span {
+
+.formInput input:invalid[focused="true"] {
+  border: 1px solid red;
+}
+
+.formInput input:invalid[focused="true"] + span {
   display: block;
 }

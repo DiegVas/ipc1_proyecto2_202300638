@@ -28,8 +28,9 @@ const inputsSignUp = [
     name: "Carne",
     type: "text",
     placeholder: "Carne",
-    errorMessage: "",
+    errorMessage: "este carne ya esta registrado",
     label: "Carne",
+    pattern: "^[0-9]{7,}$",
   },
   {
     id: 2,
@@ -78,6 +79,9 @@ const inputsSignUp = [
     type: "Password",
     placeholder: "Contraseña",
     label: "Contraseña",
+    errorMessage:
+      "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, minuscula y un numero",
+    pattern: "^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$",
   },
 ];
 
