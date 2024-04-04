@@ -5,22 +5,38 @@ import "./styles/input.css";
 import FormInput from "./FormInput";
 
 const inputsLogin = [
-  { id: 1, name: "User", type: "text", placeholder: "Carne", label: "Usuario" },
+  {
+    id: 1,
+    name: "User",
+    type: "text",
+    placeholder: "Carne",
+    errorMessage: "Usuario no encontrado",
+    label: "Usuario",
+  },
   {
     id: 2,
     name: "Password",
     type: "password",
     placeholder: "Contraseña",
+    errorMessage: "",
     label: "Contraseña",
   },
 ];
 const inputsSignUp = [
-  { id: 1, name: "Carne", type: "text", placeholder: "Carne", label: "Carne" },
+  {
+    id: 1,
+    name: "Carne",
+    type: "text",
+    placeholder: "Carne",
+    errorMessage: "",
+    label: "Carne",
+  },
   {
     id: 2,
     name: "Faculty",
     type: "text",
     placeholder: "Facultad",
+    errorMessage: "",
     label: "Facultad",
   },
 
@@ -29,6 +45,7 @@ const inputsSignUp = [
     name: "Name",
     type: "text",
     placeholder: "Nombres",
+    errorMessage: "Este carne ya esta registrado",
     label: "Nombres",
   },
   {
@@ -36,6 +53,7 @@ const inputsSignUp = [
     name: "Gender",
     type: "text",
     placeholder: "Genero",
+    errorMessage: "",
     label: "Genero",
   },
   {
@@ -43,6 +61,7 @@ const inputsSignUp = [
     name: "Career",
     type: "text",
     placeholder: "Carrera",
+    errorMessage: "",
     label: "Carrera",
   },
   {
@@ -50,6 +69,7 @@ const inputsSignUp = [
     name: "Email",
     type: "email",
     placeholder: "Correo Electronico",
+    errorMessage: "ingrese un email valido",
     label: "Correo Electronico",
   },
   {
