@@ -1,0 +1,55 @@
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+}
+
+.form form {
+  height: 90%;
+  width: 100%;
+  transition: opacity 0.5s;
+  flex-direction: column;
+  visibility: visible;
+  position: absolute;
+  display: flex;
+  opacity: 1;
+}
+
+.form form button {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #2c698d;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.form form.disabled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.formRow {
+  height: 14%;
+  margin-top: 10px;
+  display: flex;
+  gap: 5%;
+}
+
+.formRow .formInput {
+  height: 90%;
+}
+
+.formInput {
+  height: 14%;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput input {
+  padding: 15px;
+}

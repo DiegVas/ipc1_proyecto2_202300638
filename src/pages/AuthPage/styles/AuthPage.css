@@ -1,0 +1,16 @@
+.AuthPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../../../assets/waves.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
+}
+
+.AuthPage-content {
+  flex: 1;
+  display: flex;
+  margin-left: 20%;
+}
