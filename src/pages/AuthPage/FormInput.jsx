@@ -20,7 +20,6 @@ export default function FormInput(props) {
         onChange={onChange}
         onBlur={handleFocus}
         focused={focus.toString()}
-        required
       />
       <span>{errorMessage}</span>
     </div>

@@ -18,7 +18,7 @@ const inputsLogin = [
     name: "Password",
     type: "password",
     placeholder: "Contraseña",
-    errorMessage: "",
+    errorMessage: "Contraseña no valida",
     label: "Contraseña",
   },
 ];
@@ -28,7 +28,7 @@ const inputsSignUp = [
     name: "Carne",
     type: "text",
     placeholder: "Carne",
-    errorMessage: "este carne ya esta registrado",
+    errorMessage: "Ingrese minimo 7 digitos",
     label: "Carne",
     pattern: "^[0-9]{7,}$",
   },
@@ -37,7 +37,8 @@ const inputsSignUp = [
     name: "Faculty",
     type: "text",
     placeholder: "Facultad",
-    errorMessage: "",
+    errorMessage: "Ingrese una facultad valida",
+    pattern: "^[A-Za-z]+$",
     label: "Facultad",
   },
 
@@ -46,7 +47,7 @@ const inputsSignUp = [
     name: "Name",
     type: "text",
     placeholder: "Nombres",
-    errorMessage: "Este carne ya esta registrado",
+    errorMessage: "Ingrese un nombre valido",
     label: "Nombres",
   },
   {
@@ -62,7 +63,8 @@ const inputsSignUp = [
     name: "Career",
     type: "text",
     placeholder: "Carrera",
-    errorMessage: "",
+    errorMessage: "Ingrese una carrera valida",
+    pattern: "^[A-Za-z]+$",
     label: "Carrera",
   },
   {
@@ -70,7 +72,8 @@ const inputsSignUp = [
     name: "Email",
     type: "email",
     placeholder: "Correo Electronico",
-    errorMessage: "ingrese un email valido",
+    errorMessage: "Ingrese un correo valido",
+    pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
     label: "Correo Electronico",
   },
   {
@@ -81,23 +84,23 @@ const inputsSignUp = [
     label: "Contraseña",
     errorMessage:
       "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, minuscula y un numero",
-    pattern: "^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$",
+    pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$",
   },
 ];
 
 export default function LoginForm() {
   const [login, setLogin] = useState([true, false]);
   const [valueLogin, setValueLogin] = useState({
-    User: "",
-    Password: "",
+    User: { value: "", errorMessage: "" },
+    Password: { value: "", errorMessage: "" },
   });
   const [valueSignUp, setValueSignUp] = useState({
-    Name: "",
-    Gender: "",
-    Faculty: "",
-    Career: "",
-    Email: "",
-    Password: "",
+    Name: { value: "", errorMessage: "" },
+    Gender: { value: "", errorMessage: "" },
+    Faculty: { value: "", errorMessage: "" },
+    Career: { value: "", errorMessage: "" },
+    Email: { value: "", errorMessage: "" },
+    Password: { value: "", errorMessage: "" },
   });
 
   return (
@@ -110,7 +113,7 @@ export default function LoginForm() {
           setLogin={setLogin}
         />
         <StateLogin
-          text="Registrarse"
+          text="Registrar"
           active={login[1]}
           login={login}
           setLogin={setLogin}
@@ -153,7 +156,10 @@ function FormLogin({ login, getter, setter }) {
   };
 
   const onChange = (e) => {
-    setter({ ...getter, [e.target.name]: e.target.value });
+    setter({
+      ...getter,
+      [e.target.name]: { ...getter[e.target.name], value: value },
+    });
   };
 
   return (
@@ -162,7 +168,7 @@ function FormLogin({ login, getter, setter }) {
         <FormInput
           key={input.id}
           {...input}
-          value={getter[input.name]}
+          value={getter[input.name].value}
           onChange={onChange}
         />
       ))}
@@ -175,6 +181,7 @@ function FormSignUp({ login, getter, setter }) {
   const renderFormRow = () => {
     let forms = [];
     for (let index = 0; index < 4; index += 2) {
+      console.log(getter[inputsSignUp[index].name]);
       forms.push(
         <div className="formRow">
           {" "}
@@ -203,7 +210,15 @@ function FormSignUp({ login, getter, setter }) {
   };
 
   const onChange = (e) => {
-    setter({ ...getter, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setter({
+      ...getter,
+      [e.target.name]: { ...getter[e.target.name], value: value },
+    });
+    if (name == "Career" && value == "hola") {
+      e.target.setCustomValidity("un hola encontrado");
+      e.target.reportValidity();
+    }
   };
 
   return (
@@ -213,7 +228,7 @@ function FormSignUp({ login, getter, setter }) {
         <FormInput
           key={input.id}
           {...input}
-          value={getter[input.name]}
+          value={getter[input.name].value}
           onChange={onChange}
         />
       ))}
