@@ -68,10 +68,18 @@
   display: none;
 }
 
-.formInput input:invalid[focused="true"] {
+.formInput input.invalid[focused="true"] {
   border: 1px solid red;
 }
 
-.formInput input:invalid[focused="true"] + span {
+.formInput input.invalid[focused="true"] + span {
+  display: block;
+}
+
+.formInput input.invalid {
+  border: 1px solid red;
+}
+
+.formInput input.invalid + span {
   display: block;
 }
