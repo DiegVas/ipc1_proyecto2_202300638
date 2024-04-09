@@ -1,10 +1,10 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import AuthPage from "./pages/AuthPage/AuthPage";
 import "./global.css";
+import { BrowserRouter } from "react-router-dom";
+import RoutesNavigator from "./Routes/Routes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthPage />
-  </React.StrictMode>
+  <BrowserRouter>
+    <RoutesNavigator />
+  </BrowserRouter>
 );

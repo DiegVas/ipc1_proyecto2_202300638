@@ -1,22 +1,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./styles/input.css";
 import FormInput from "./FormInput";
 import { inputsLogin, inputsSignUp } from "./propsInputs";
+import { useAuth } from "../../Routes/Routes";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const [login, setLogin] = useState([true, false]);
   const [valueLogin, setValueLogin] = useState({
-    User: { value: "", errorMessage: "" },
+    Carne: { value: "", errorMessage: "" },
     Password: { value: "", errorMessage: "" },
   });
   const [valueSignUp, setValueSignUp] = useState({
-    Carne: { value: "", errorMessage: "" },
-    Faculty: { value: "", errorMessage: "" },
     Name: { value: "", errorMessage: "" },
+    LastName: { value: "", errorMessage: "" },
+    Carne: { value: "", errorMessage: "" },
     Gender: { value: "", errorMessage: "" },
     Career: { value: "", errorMessage: "" },
+    Faculty: { value: "", errorMessage: "" },
     Email: { value: "", errorMessage: "" },
     Password: {
       value: "",
@@ -70,6 +73,9 @@ function StateLogin({ text, active, login, setLogin }) {
 }
 
 function FormLogin({ login, getter, setter }) {
+  const { loginState } = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -83,9 +89,9 @@ function FormLogin({ login, getter, setter }) {
       };
     }
 
-    if (JSON.stringify(getter) != JSON.stringify(validity)) {
-      return setter(validity);
-    }
+    setter(validity);
+    loginState();
+    navigate("/");
   };
 
   const onChange = (e) => {
@@ -117,9 +123,11 @@ function FormLogin({ login, getter, setter }) {
 }
 
 function FormSignUp({ login, getter, setter }) {
+  const { loginState } = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
     let validity = {};
     for (let key in getter) {
       validity[key] = {
@@ -130,6 +138,14 @@ function FormSignUp({ login, getter, setter }) {
       };
     }
     setter(validity);
+    let hasErrors = Object.values(validity).some(
+      (input) => input.errorMessage !== ""
+    );
+    if (!hasErrors) {
+      loginState();
+      navigate("/");
+    } else {
+    }
   };
 
   const onChange = (e) => {
@@ -147,7 +163,7 @@ function FormSignUp({ login, getter, setter }) {
 
   return (
     <form onSubmit={handleSubmit} className={login ? "" : "disabled"}>
-      {[0, 2].map((startIndex) => (
+      {[0, 2, 4].map((startIndex) => (
         <div className="formRow" key={startIndex}>
           {inputsSignUp
             .slice(startIndex, startIndex + 2)
@@ -162,7 +178,7 @@ function FormSignUp({ login, getter, setter }) {
             ))}
         </div>
       ))}
-      {inputsSignUp.slice(4).map(({ conditions, ...input }) => (
+      {inputsSignUp.slice(6).map(({ conditions, ...input }) => (
         <FormInput
           key={input.id}
           {...input}

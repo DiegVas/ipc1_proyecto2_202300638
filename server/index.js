@@ -1,29 +1,29 @@
 console.clear();
 import {} from "http";
-import ExpressServer, { response } from "express";
-import { send } from "process";
+import ExpressServer from "express";
+import authRouter from "./Routes/auth.js";
 
 const PORT = 3000;
 const app = ExpressServer();
-const data = [];
+
+export const users = [
+  {
+    uid: "1c51596b-21fc-419b-afaa-6485fa42b44b",
+    carne: "12024",
+    name: "David Augusto",
+    lastName: "Maldonado Hurtarte",
+    faculty: "ingenieria",
+    career: "Ingenieria en Ciencieas y Sistemas",
+    email: "ipc11s2024@gmail.com",
+    password: "@dminIPC1",
+    role: "admin",
+  },
+];
+export const posts = [];
 
 app.use(ExpressServer.json());
+app.use(authRouter);
 
-//Obtener los detalles de una cuenta con el guid
-app.get('/account/:guid', (req, res)=>{
-
-    console.log(req.params.guid);
-    const user = data.find((user)=> user.guid === req.params.guid);
-    if(!user) res.status(404).send();
-    res.send();
-});
-//Crear una cuenta
-app.post('/account', (req, res)=>{});
-//Actualizar una cuenta
-app.patch('/account', (req, res)=>{});
-//Eliminar una cuenta
-app.delete('/account', (req, res)=>{});
-
-app.listen(PORT, ()=>{
-    console.log(`Server running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
