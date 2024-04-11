@@ -1,23 +1,34 @@
 import { users } from "../index.js";
 import express from "express";
+import { v4 } from "uuid";
 
 const authRouter = express.Router();
 authRouter.use(express.json());
 
 //Autenficar un usuario
-authRouter.get("/auth/login", (req, res) => {
+authRouter.post("/auth/login", (req, res) => {
   console.clear();
   console.log(users);
 
-  const { carne, password } = req.body;
-  if (!carne || !password) return res.status(400).send();
+  const { Carne, Password } = req.body;
+  if (!Carne || Carne == "" || !Password || Password == "") {
+    return res.status(400).send();
+  }
 
-  const user = users.find((user) => user.carne === carne);
-  if (!user) return res.status(404).send();
+  const user = users.find((user) => user.Carne === Carne);
+  console.log(user);
+  if (!user) {
+    return res.status(404).send();
+  }
 
-  if (user.password !== req.body.password) return res.status(409).send();
+  if (user.Password !== Password) {
+    return res.status(409).send();
+  }
 
-  res.send(`Usuario ${user.name} autenticado`);
+  const userWithoutPassword = { ...user };
+  delete userWithoutPassword.Password;
+  console.log(userWithoutPassword);
+  return res.status(200).json(userWithoutPassword);
 });
 
 //Crear un usuario
@@ -25,14 +36,22 @@ authRouter.post("/auth/signUp", (req, res) => {
   console.clear();
   console.log(users);
 
-  const { carne, email } = req.body;
-  if (!carne || !email) return res.status(400).send();
-  const listCarne = users.filter((user) => user.carne === carne);
-  const listEmail = users.filter((user) => user.email === email);
-  if (listCarne.length || listEmail.length) return res.status(409).send();
-  users.push(req.body);
-  console.log(users);
-  res.send("Usuario creado");
+  const { Carne, Email } = req.body;
+  if (!Carne || Carne == "" || !Email || Email == "") {
+    return res.status(400).send();
+  }
+
+  const listCarne = users.filter((user) => user.Carne === Carne);
+  const listEmail = users.filter((user) => user.Email === Email);
+  if (listCarne.length) {
+    return res.status(404).send();
+  }
+  if (listEmail.length) {
+    return res.status(409).send();
+  }
+  const Uuid = v4();
+  users.push({ ...req.body, Uuid: Uuid });
+  return res.status(200).json({ ...req.body, Uuid: Uuid });
 });
 
 export default authRouter;

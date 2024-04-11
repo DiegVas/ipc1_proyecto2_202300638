@@ -2,40 +2,38 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { createContext, useContext, useState } from "react";
 import AuthPage from "../pages/AuthPage/AuthPage";
-import HomePage from "../pages/HomePage/AuthPage";
+import HomePage from "../pages/HomePage/Homepage";
 
 const AuthConetext = createContext();
 
 export const useAuth = () => useContext(AuthConetext);
 
 const ProtectedRoute = ({ children }) => {
-  const { UserAuthenticated } = useAuth();
-  if (!UserAuthenticated) {
+  const { SessionState } = useAuth();
+  if (!SessionState.State) {
     return <Navigate to="/auth" replace />;
   }
   return children;
 };
 
 const AuthRoute = ({ children }) => {
-  const { UserAuthenticated } = useAuth();
-  if (UserAuthenticated) {
+  const { SessionState } = useAuth();
+  if (SessionState.State) {
     return <Navigate to="/" replace />;
   }
   return children;
 };
 
 export default function RoutesNavigator() {
-  const [UserAuthenticated, setUserAuthenticated] = useState(false);
+  const [SessionState, setSessionState] = useState({ User: {}, State: false });
 
-  const loginState = () => setUserAuthenticated(true);
+  const loginState = (User) => setSessionState({ User: User, State: true });
 
-  const logoutState = () => setUserAuthenticated(false);
+  const logoutState = () => setSessionState({ User: {}, State: false });
 
   return (
     <div className="w-full h-full">
-      <AuthConetext.Provider
-        value={{ UserAuthenticated, loginState, logoutState }}
-      >
+      <AuthConetext.Provider value={{ SessionState, loginState, logoutState }}>
         <Routes>
           <Route
             path="/"

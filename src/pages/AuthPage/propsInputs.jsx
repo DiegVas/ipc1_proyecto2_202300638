@@ -5,14 +5,14 @@ export const inputsLogin = [
     type: "text",
     placeholder: "Carne",
     label: "Usuario",
-    conditions: function (values) {
+    conditions: function (values, errorMessage) {
       let error = "";
       if (values == "") {
         error = "Complete este campo";
       } else if (!RegExp("^[0-9]+$").test(values)) {
         error = "Solo se permiten numeros";
-      } else if (!RegExp("^[0-9]{7,}$").test(values)) {
-        error = "El carne debe tener 7 digitos";
+      } else if (errorMessage == "Carne no encontrado") {
+        error = errorMessage;
       }
       return error;
     },
@@ -23,7 +23,7 @@ export const inputsLogin = [
     type: "password",
     placeholder: "Contraseña",
     label: "Contraseña",
-    conditions: function (values) {
+    conditions: function (values, errorMessage) {
       let error = "";
       if (values == "") {
         error = "Complete este campo";
@@ -34,6 +34,8 @@ export const inputsLogin = [
       ) {
         error =
           "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un numero";
+      } else if (errorMessage == "Contraseña incorrecta") {
+        error = errorMessage;
       }
       return error;
     },
@@ -78,7 +80,7 @@ export const inputsSignUp = [
     type: "text",
     placeholder: "Carne",
     label: "Carne",
-    conditions: function (values) {
+    conditions: function (values, errorMessage) {
       let error = "";
       if (values == "") {
         error = "Complete este campo";
@@ -86,6 +88,8 @@ export const inputsSignUp = [
         error = "Solo se permiten numeros";
       } else if (!RegExp("^[0-9]{7,}$").test(values)) {
         error = "El carne debe tener 7 digitos";
+      } else if (errorMessage == "Carne ya registrado") {
+        error = errorMessage;
       }
       return error;
     },
@@ -146,7 +150,7 @@ export const inputsSignUp = [
     placeholder: "Correo Electronico",
 
     label: "Correo Electronico",
-    conditions: function (values) {
+    conditions: function (values, errorMessage) {
       let error = "";
       if (values == "") {
         error = "Complete este campo";
@@ -156,6 +160,8 @@ export const inputsSignUp = [
         )
       ) {
         error = "ingrese un correo valido";
+      } else if (errorMessage == "Correo ya registrado") {
+        error = errorMessage;
       }
 
       return error;
