@@ -1,0 +1,58 @@
+.Container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Container div {
+  display: flex;
+  flex-direction: column;
+}
+
+.SideBar {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.SideBar img {
+  width: 11rem;
+  height: auto;
+}
+
+.SideBar nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  gap: 1rem;
+  padding: 0 8%;
+}
+
+.SideBar nav li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s;
+  font-size: 1.4rem;
+  padding-left: 10%;
+  background-color: #2c698d;
+}
+
+.SideBar nav li * {
+  color: white;
+}
+
+.Main {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}

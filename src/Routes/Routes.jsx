@@ -38,9 +38,9 @@ export default function RoutesNavigator() {
           <Route
             path="/"
             element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
+              //    <ProtectedRoute>
+              <HomePage />
+              //  </ProtectedRoute>
             }
           />
           ;
