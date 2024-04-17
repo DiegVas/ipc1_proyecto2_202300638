@@ -3,6 +3,11 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import { createContext, useContext, useState } from "react";
 import AuthPage from "../pages/AuthPage/AuthPage";
 import HomePage from "../pages/HomePage/Homepage";
+import Posts from "../pages/HomePage/Post/Posts";
+import Feed from "../pages/HomePage/Feed/Feed";
+import MyPosts from "../pages/HomePage/MyPosts/MyPosts";
+import Liked from "../pages/HomePage/Liked/Liked";
+import FeedFilter from "../pages/HomePage/Feed/FeedFilter";
 
 const AuthConetext = createContext();
 
@@ -36,13 +41,21 @@ export default function RoutesNavigator() {
       <AuthConetext.Provider value={{ SessionState, loginState, logoutState }}>
         <Routes>
           <Route
-            path="/"
+            path=""
             element={
               //    <ProtectedRoute>
               <HomePage />
               //  </ProtectedRoute>
             }
-          />
+          >
+            <Route path="/" element={<Feed />}></Route>
+            <Route path="Post" element={<Posts />} />
+
+            <Route path="MyPosts" element={<MyPosts />} />
+            <Route path="Liked" element={<Liked />} />
+            <Route path="MyProfile" element={<MyPosts />} />
+            <Route path="*" element={<h1>404</h1>} />
+          </Route>
           ;
           <Route
             path="/auth"

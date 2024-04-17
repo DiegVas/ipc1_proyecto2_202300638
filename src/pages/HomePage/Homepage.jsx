@@ -1,9 +1,12 @@
-import { useAuth } from "../../Routes/Routes";
-import logo from "../../assets/logo.png";
 import "./styles/HomePage.css";
+import logo from "../../assets/logo.png";
+
+import { useAuth } from "../../Routes/Routes";
+import { NavLink, Outlet } from "react-router-dom";
 import { CgFeed } from "react-icons/cg";
 import { MdDynamicFeed } from "react-icons/md";
 import { FaHeart, FaUser } from "react-icons/fa";
+import { IoIosAdd } from "react-icons/io";
 
 export default function HomePage() {
   //  const { SessionState } = useAuth();
@@ -13,28 +16,31 @@ export default function HomePage() {
       <div className="SideBar">
         <img src={logo} alt="Logo" />
         <nav>
-          <li>
+          <NavLink to="/">
             <CgFeed />
-            <a href="">Publicar</a>
-          </li>
-          <li>
+            Publicaciones
+          </NavLink>
+          <NavLink to="/Post">
+            <IoIosAdd />
+            Publicar
+          </NavLink>
+          <NavLink to="MyPosts">
             <MdDynamicFeed />
-            <a href="">Mis publicaciones</a>
-          </li>
-          <li>
+            Mis publicaciones
+          </NavLink>
+          <NavLink to="Liked">
             <FaHeart />
-            <a href="">Me gusta</a>
-          </li>
-          <li>
+            Me gusta
+          </NavLink>
+          <NavLink to="MyProfile">
             <FaUser />
-            <a href="">Perfil</a>
-          </li>
+            Perfil
+          </NavLink>
         </nav>
       </div>
       <div className="Main">
         <nav className="UserMenu"></nav>
-        <h1>Bienvenido</h1>
-        <p>Publicaciones</p>
+        <Outlet />
       </div>
     </div>
   );
