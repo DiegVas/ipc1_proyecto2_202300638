@@ -7,7 +7,6 @@ import Posts from "../pages/HomePage/Post/Posts";
 import Feed from "../pages/HomePage/Feed/Feed";
 import MyPosts from "../pages/HomePage/MyPosts/MyPosts";
 import Liked from "../pages/HomePage/Liked/Liked";
-import FeedFilter from "../pages/HomePage/Feed/FeedFilter";
 
 const AuthConetext = createContext();
 

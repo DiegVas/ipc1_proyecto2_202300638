@@ -30,31 +30,13 @@ export default function LoginForm() {
   return (
     <section className="LoginForm">
       <nav className="HeaderForm">
-        <StateLogin
-          text="Iniciar sesión"
-          active={login[0]}
-          login={login}
-          setLogin={setLogin}
-        />
-        <StateLogin
-          text="Registrar"
-          active={login[1]}
-          login={login}
-          setLogin={setLogin}
-        />
+        <StateLogin text="Iniciar sesión" active={login[0]} login={login} setLogin={setLogin} />
+        <StateLogin text="Registrar" active={login[1]} login={login} setLogin={setLogin} />
       </nav>
 
       <div className="form">
-        <FormLogin
-          login={login[0]}
-          getter={valueLogin}
-          setter={setValueLogin}
-        />
-        <FormSignUp
-          login={login[1]}
-          getter={valueSignUp}
-          setter={setValueSignUp}
-        />
+        <FormLogin login={login[0]} getter={valueLogin} setter={setValueLogin} />
+        <FormSignUp login={login[1]} getter={valueSignUp} setter={setValueSignUp} />
       </div>
     </section>
   );
@@ -63,10 +45,7 @@ export default function LoginForm() {
 function StateLogin({ text, active, login, setLogin }) {
   const classActive = active ? "" : "disabled";
   return (
-    <li
-      className={classActive}
-      onClick={() => setLogin([!login[0], !login[1]])}
-    >
+    <li className={classActive} onClick={() => setLogin([!login[0], !login[1]])}>
       <span>{text}</span>
     </li>
   );
@@ -79,12 +58,7 @@ function FormLogin({ login, getter, setter }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await validateForm(
-      getter,
-      inputsLogin,
-      setter,
-      "http://localhost:3000/auth/login"
-    );
+    const response = await validateForm(getter, inputsLogin, setter, "http://localhost:3000/auth/login");
     if (response && response.status == 404) {
       setter({
         ...getter,
@@ -109,9 +83,7 @@ function FormLogin({ login, getter, setter }) {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    const condition = inputsLogin
-      .find((input) => input.name == name)
-      .conditions(value);
+    const condition = inputsLogin.find((input) => input.name == name).conditions(value);
 
     setter({
       ...getter,
@@ -141,12 +113,7 @@ function FormSignUp({ login, getter, setter }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await validateForm(
-      getter,
-      inputsSignUp,
-      setter,
-      "http://localhost:3000/auth/signUp"
-    );
+    const response = await validateForm(getter, inputsSignUp, setter, "http://localhost:3000/auth/signUp");
     if (response && response.status == 404) {
       setter({
         ...getter,
@@ -172,9 +139,7 @@ function FormSignUp({ login, getter, setter }) {
   const onChange = (e) => {
     const { name, value } = e.target;
 
-    const condition = inputsSignUp
-      .find((input) => input.name == name)
-      .conditions(value);
+    const condition = inputsSignUp.find((input) => input.name == name).conditions(value);
 
     setter({
       ...getter,
@@ -186,17 +151,15 @@ function FormSignUp({ login, getter, setter }) {
     <form onSubmit={handleSubmit} className={login ? "" : "disabled"}>
       {[0, 2, 4].map((startIndex) => (
         <div className="formRow" key={startIndex}>
-          {inputsSignUp
-            .slice(startIndex, startIndex + 2)
-            .map(({ conditions, ...input }) => (
-              <FormInput
-                key={input.id}
-                {...input}
-                errorMessage={getter[input.name].errorMessage}
-                value={getter[input.name].value}
-                onChange={onChange}
-              />
-            ))}
+          {inputsSignUp.slice(startIndex, startIndex + 2).map(({ conditions, ...input }) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              errorMessage={getter[input.name].errorMessage}
+              value={getter[input.name].value}
+              onChange={onChange}
+            />
+          ))}
         </div>
       ))}
       {inputsSignUp.slice(6).map(({ conditions, ...input }) => (
@@ -218,15 +181,11 @@ const validateForm = (getter, inputs, setter, url) => {
   for (let key in getter) {
     validity[key] = {
       value: getter[key].value,
-      errorMessage: inputs
-        .find((input) => input.name == key)
-        .conditions(getter[key].value, getter[key].errorMessage),
+      errorMessage: inputs.find((input) => input.name == key).conditions(getter[key].value, getter[key].errorMessage),
     };
   }
   setter(validity);
-  let hasErrors = Object.values(validity).some(
-    (input) => input.errorMessage !== ""
-  );
+  let hasErrors = Object.values(validity).some((input) => input.errorMessage !== "");
 
   console.log(hasErrors);
 

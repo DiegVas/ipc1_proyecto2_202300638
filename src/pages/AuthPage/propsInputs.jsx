@@ -27,13 +27,8 @@ export const inputsLogin = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (
-        !RegExp(
-          "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])?[A-Za-z\\d!@#$%^&*]{8,}$"
-        ).test(values)
-      ) {
-        error =
-          "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un numero";
+      } else if (!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])?[A-Za-z\\d!@#$%^&*]{8,}$").test(values)) {
+        error = "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un numero";
       } else if (errorMessage == "Contraseña incorrecta") {
         error = errorMessage;
       }
@@ -154,11 +149,7 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (
-        !RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$").test(
-          values
-        )
-      ) {
+      } else if (!RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$").test(values)) {
         error = "ingrese un correo valido";
       } else if (errorMessage == "Correo ya registrado") {
         error = errorMessage;
@@ -178,13 +169,8 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (
-        !RegExp(
-          "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])?[A-Za-z\\d!@#$%^&*]{8,}$"
-        ).test(values)
-      ) {
-        error =
-          "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un numero";
+      } else if (!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])?[A-Za-z\\d!@#$%^&*]{8,}$").test(values)) {
+        error = "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un numero";
       }
       return error;
     },
