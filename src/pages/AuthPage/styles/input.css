@@ -43,7 +43,7 @@
   height: 90%;
 }
 
-.formRow .formInput input {
+.formRow .formInput input,.formRow .formInput select {
   padding: 5%;
 }
 
@@ -55,7 +55,7 @@
   flex-direction: column;
 }
 
-.formInput input {
+.formInput input,.formInput select {
   border: 1px solid black;
   font-size: 1rem;
   padding: 2.5%;
@@ -70,18 +70,18 @@
   display: none;
 }
 
-.formInput input.invalid[focused="true"] {
+.formInput input.invalid[focused="true"], .formInput select.invalid[focused="true"]  {
   border: 1px solid red;
 }
 
-.formInput input.invalid[focused="true"] + span {
+.formInput input.invalid[focused="true"] + span, .formInput select.invalid[focused="true"] + span{
   display: block;
 }
 
-.formInput input.invalid {
+.formInput input.invalid, .formInput select.invalid{
   border: 1px solid red;
 }
 
-.formInput input.invalid + span {
+.formInput input.invalid + span, .formInput select.invalid + span{
   display: block;
 }
