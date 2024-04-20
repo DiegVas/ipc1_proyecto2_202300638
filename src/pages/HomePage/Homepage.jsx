@@ -13,6 +13,7 @@ export default function HomePage() {
 
   return (
     <div className="Container">
+      <div className={"Placeholder"} />
       <div className="SideBar">
         <img src={logo} alt="Logo" />
         <nav>

@@ -2,13 +2,16 @@
   width: 60%;
   display: flex;
   flex-direction: column;
-  padding: 1.5%;
   margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 30px;
 }
 
-.post .post-header {
+.post-body {
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 3%;
+}
+
+.post-body .post-header {
   display: flex;
   flex-direction: row;
   font-weight: 700;
@@ -17,27 +20,28 @@
   align-items: center;
 }
 
-.post .post-header .post-user {
+.post-body .post-header .post-user {
   display: flex;
   flex-direction: column;
   gap: 1%;
 }
 
-.post-body {
+.post-section {
   display: flex;
   flex-direction: column;
   margin: 0.5rem 0;
   gap: 1%;
 }
 
-.post-body img {
+.post-section img {
   max-height: 40vh;
   border-radius: 10px;
   object-fit: contain;
   width: 100%;
+  margin: 10px 0px;
 }
 
-.post button {
+.post-body button {
   cursor: pointer;
   transition: all 0.3s ease-in;
   display: flex;
@@ -45,22 +49,27 @@
   justify-items: center;
   gap: 0.5rem;
 }
-.post button.like * {
+
+.post-body nav {
+  margin: 0px;
+}
+
+.post-body button.like * {
   color: #f5487f;
 }
-
-.post button:hover {
-  background-color: aliceblue;
+.post-body button:hover {
+  background-color: #f2f2f2;
 }
 
-.post div span {
+.post-body div span {
   margin-right: 0.5rem;
   color: #1da1f2;
 }
 
-.post .post-hashtags {
+.post-body .post-hashtags {
   display: flex;
   flex-direction: row;
   width: 100%;
   gap: 2%;
+  margin-top: 10px;
 }
