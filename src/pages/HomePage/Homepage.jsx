@@ -6,9 +6,13 @@ import { NavLink, Outlet } from "react-router-dom";
 import { CgFeed } from "react-icons/cg";
 import { MdDynamicFeed } from "react-icons/md";
 import { FaHeart, FaUser } from "react-icons/fa";
+import { createContext, useContext, useState } from "react";
+
+const PostContext = createContext();
+export const UsePostContext = () => useContext(PostContext);
 
 export default function HomePage() {
-  //  const { SessionState } = useAuth();
+  const [postState, setPostState] = useState([]);
 
   return (
     <div className="Container">
@@ -20,6 +24,7 @@ export default function HomePage() {
             <CgFeed />
             Publicaciones
           </NavLink>
+
           <NavLink to="MyPosts">
             <MdDynamicFeed />
             Mis publicaciones
@@ -35,8 +40,9 @@ export default function HomePage() {
         </nav>
       </div>
       <div className="Main">
-        <nav className="UserMenu"></nav>
-        <Outlet />
+        <PostContext.Provider value={{ postState, setPostState }}>
+          <Outlet />
+        </PostContext.Provider>
       </div>
     </div>
   );

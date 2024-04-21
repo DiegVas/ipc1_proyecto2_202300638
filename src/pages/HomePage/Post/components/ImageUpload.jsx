@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import { useRef, useState } from "react";
 
-function ImageUpload({ ImageChange }) {
+function ImageUpload({ image, setImage }) {
   const fileInputRef = useRef();
-  const [image, setImage] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
-
+  const [leaveDelay, setLeaveDelay] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const onDragOver = (event) => {
     event.preventDefault();
+    clearTimeout(leaveDelay);
+    if (!isDragOver) setIsDragOver(true);
   };
 
   const onDragEnter = (event) => {
@@ -17,20 +19,31 @@ function ImageUpload({ ImageChange }) {
 
   const onDragLeave = (event) => {
     event.preventDefault();
-    setIsDragOver(false);
+    setLeaveDelay(
+      setTimeout(() => {
+        setIsDragOver(false);
+      }, 100)
+    );
   };
 
   const onDrop = (event) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
-    setImage(URL.createObjectURL(files[0]));
-    ImageChange({ target: { files: [files[0]] } });
     setIsDragOver(false);
+
+    if (files[0] && files[0].type.startsWith("image/")) {
+      setImage(files[0]);
+      setImagePreview(URL.createObjectURL(files[0]));
+    }
   };
 
   const onFileChange = (event) => {
-    setImage(URL.createObjectURL(event.target.files[0]));
-    ImageChange(event);
+    const file = event.target.files[0];
+
+    if (file) {
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
   };
 
   const onClick = () => {
@@ -49,11 +62,10 @@ function ImageUpload({ ImageChange }) {
           onClick={onClick}
         >
           <input ref={fileInputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={onFileChange} />
-          <div style={{ position: "relative" }}>
-            {image && <img src={image} alt="Vista previa" />}
-            {isDragOver && <p style={{ position: "absolute", top: 0, left: 0, opacity: 0.5 }}>Deja la imagen aquí</p>}
-            {!image && !isDragOver && <p>Arrastra y suelta una imagen aquí, o haz clic para seleccionar una imagen</p>}
-          </div>
+
+          {image && <img src={imagePreview} alt="Vista previa" />}
+          {isDragOver && <p className="dropzone-text">Suelta la imagen</p>}
+          {!image && !isDragOver && <p>Arrastra y suelta una imagen aquí, o haz clic para seleccionar una imagen</p>}
         </div>
       </div>
     </div>

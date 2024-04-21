@@ -7,7 +7,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 
-export default function Post({ tweet, hashtags, name, career, faculty, date, image }) {
+export default function Post({ tweet, hashtags, name, career, faculty, date, image, anonymous }) {
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState([]);
@@ -40,13 +40,19 @@ export default function Post({ tweet, hashtags, name, career, faculty, date, ima
   };
 
   const handleCommentSubmit = () => {
-    setComments([...comments, { username: name, text: currentComment }]);
+    const trimmedComment = currentComment.trim();
+
+    if (!trimmedComment) {
+      alert("El comentario no puede estar vacío");
+      return;
+    }
+
+    setComments([...comments, { username: name, text: trimmedComment }]);
     setCurrentComment("");
   };
 
   const toggleComments = () => {
     setShowComments(!showComments);
-    console.log("Show comments: ", showComments);
   };
 
   const handleInputChange = (e) => {
@@ -63,12 +69,10 @@ export default function Post({ tweet, hashtags, name, career, faculty, date, ima
       <div className="post-body" style={postStyle}>
         <div className="post-header">
           <div className="post-user">
-            <p>{name}</p>
+            <p>{!anonymous ? name : "Usuario Anonimo"}</p>
             <p>{new Date(date).toLocaleDateString()}</p>
           </div>
-          <p>
-            {career} ({faculty})
-          </p>
+          <p>{!anonymous ? `${career} (${faculty})` : "Universidad de San Carlos de Guatemala"}</p>
         </div>
         <section className="post-section">
           <p>{tweet}</p>

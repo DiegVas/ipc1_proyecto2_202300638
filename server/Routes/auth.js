@@ -54,4 +54,35 @@ authRouter.post("/auth/signUp", (req, res) => {
   return res.status(200).json({ ...req.body, Uuid: Uuid });
 });
 
+authRouter.delete("/auth/:Uuid", (req, res) => {
+  const { Uid } = req.body;
+  if (!Uid || Uid == "") {
+    return res.status(400).send();
+  }
+  const userIndex = users.findIndex((user) => user.Uid === Uid);
+  if (userIndex === -1) {
+    return res.status(404).send();
+  }
+  users.splice(userIndex, 1);
+  return res.status(200).send();
+});
+
+authRouter.put("/auth/:Uuid", (req, res) => {
+  const { Uuid } = req.params;
+  const updates = req.body;
+
+  if (!Uuid || Uuid == "") {
+    return res.status(400).send();
+  }
+
+  const user = users.find((user) => user.Uuid === Uuid);
+  if (!user) {
+    return res.status(404).send();
+  }
+
+  Object.assign(user, updates);
+
+  return res.status(200).json(user);
+});
+
 export default authRouter;

@@ -41,7 +41,7 @@ export default function RoutesNavigator() {
           <Route
             path=""
             element={
-              //    <ProtectedRoute>
+              // <ProtectedRoute>
               <HomePage />
               //  </ProtectedRoute>
             }

@@ -9,17 +9,57 @@
   font-family: "Poppins", sans-serif;
 }
 
-.post-form form {
-  background-color: aqua;
-  height: 90%;
+.post-form .post-header {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10%;
 }
 
-.dropzone {
-  width: 200px;
-  height: 200px;
-  border: 2px dashed #ccc;
+.post-form .post-header div {
+  gap: 10px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+}
+
+.post-form form {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.post-form form li {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form form li label {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 5px;
+}
+
+.post-form form li textarea {
+  height: 15vh;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.post-form form .post-button {
+  font-size: 1.2rem;
+  color: white;
+  margin: 0px 10%;
+  font-weight: bold;
+  background-color: #5c8cae;
+  border-radius: 30px;
+  padding: 2%;
+  cursor: pointer;
+}
+
+.MuiAutocomplete-tag {
+  margin-left: auto !important;
 }
