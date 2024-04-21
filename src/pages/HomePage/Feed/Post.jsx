@@ -100,13 +100,13 @@ export default function Post({ tweet, hashtags, name, career, faculty, date, ima
           />
           <button onClick={handleCommentSubmit}>Enviar comentario</button>
         </div>
-        <div>
+        <section>
           {comments.map((comment, index) => (
             <p key={index}>
               <strong>{comment.username}:</strong> {comment.text}
             </p>
           ))}
-        </div>
+        </section>
       </div>
     </div>
   );

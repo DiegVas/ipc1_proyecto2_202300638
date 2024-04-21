@@ -1,12 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
-import "./styles/input.css";
+
+import { useState } from "react";
+import "../styles/input.css";
 
 export default function FormInput(props) {
-  const { label, errorMessage, onChange, id, isComboBox, ...inputProps } =
-    props;
+  const { label, errorMessage, onChange, id, isComboBox, ...inputProps } = props;
   const [focus, setFocus] = useState(false);
 
   const handleFocus = (e) => setFocus(true);

@@ -6,7 +6,6 @@ import { NavLink, Outlet } from "react-router-dom";
 import { CgFeed } from "react-icons/cg";
 import { MdDynamicFeed } from "react-icons/md";
 import { FaHeart, FaUser } from "react-icons/fa";
-import { IoIosAdd } from "react-icons/io";
 
 export default function HomePage() {
   //  const { SessionState } = useAuth();
@@ -20,10 +19,6 @@ export default function HomePage() {
           <NavLink to="/">
             <CgFeed />
             Publicaciones
-          </NavLink>
-          <NavLink to="/Post">
-            <IoIosAdd />
-            Publicar
           </NavLink>
           <NavLink to="MyPosts">
             <MdDynamicFeed />

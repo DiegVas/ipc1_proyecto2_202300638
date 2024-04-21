@@ -1,5 +1,5 @@
-import logo from "../../assets/logo.png";
-import "./styles/HeaderPage.css";
+import logo from "../../../assets/logo.png";
+import "../styles/HeaderPage.css";
 
 export default function HeaderPage() {
   return (

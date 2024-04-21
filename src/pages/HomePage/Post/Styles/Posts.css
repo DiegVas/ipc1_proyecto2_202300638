@@ -1,0 +1,25 @@
+.post-form {
+  font-size: 1.5rem;
+  padding: 5%;
+  height: 100%;
+  width: 100%;
+}
+.post-form h1 {
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+}
+
+.post-form form {
+  background-color: aqua;
+  height: 90%;
+}
+
+.dropzone {
+  width: 200px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
