@@ -6,6 +6,7 @@ import HomePage from "../pages/HomePage/Homepage";
 import Feed from "../pages/HomePage/Feed/Feed";
 import MyPosts from "../pages/HomePage/MyPosts/MyPosts";
 import Liked from "../pages/HomePage/Liked/Liked";
+import MyProfile from "../pages/HomePage/MyProfile/MyProfile";
 
 const AuthConetext = createContext();
 
@@ -49,7 +50,7 @@ export default function RoutesNavigator() {
             <Route path="/" element={<Feed />}></Route>
             <Route path="MyPosts" element={<MyPosts />} />
             <Route path="Liked" element={<Liked />} />
-            <Route path="MyProfile" element={<MyPosts />} />
+            <Route path="MyProfile" element={<MyProfile />} />
             <Route path="*" element={<h1>404</h1>} />
           </Route>
           ;

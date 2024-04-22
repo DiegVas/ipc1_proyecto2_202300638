@@ -41,7 +41,7 @@ export default function Post({
     setLiked(likedBy.includes(User.Uuid));
 
     setBackgroundColor(getRandomPastelColor());
-  }, [User.Uuid, likedBy, likes, comments, commentState]);
+  }, []);
 
   const postStyle = {
     backgroundColor: backgroundColor,
@@ -85,7 +85,7 @@ export default function Post({
         return;
       }
 
-      setCommentState([...commentState, { username: User.Name, text: trimmedComment }]);
+      setCommentState([...commentState, { username: User.Name, text: currentComment }]);
       setCurrentComment("");
     } catch (error) {
       console.error(error);
@@ -111,7 +111,7 @@ export default function Post({
         <div className="post-header">
           <div className="post-user">
             <p>{!anonymous ? name : "Usuario Anonimo"}</p>
-            <p>{new Date(date).toLocaleDateString()}</p>
+            <p>{new Date(date).toLocaleString()}</p>
           </div>
           <p>{!anonymous ? `${career} (${faculty})` : "Universidad de San Carlos de Guatemala"}</p>
         </div>

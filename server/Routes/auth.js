@@ -1,6 +1,7 @@
 import { users } from "../index.js";
 import express from "express";
 import { v4 } from "uuid";
+import { posts } from "../index.js";
 
 const authRouter = express.Router();
 authRouter.use(express.json());
@@ -80,8 +81,17 @@ authRouter.put("/auth/:Uuid", (req, res) => {
     return res.status(404).send();
   }
 
-  Object.assign(user, updates);
+  posts.forEach((post) => {
+    post.comments.forEach((comment) => {
+      if (comment.username === user.Name) {
+        comment.username = updates.Name;
+      }
+    });
+  });
 
+  console.log(posts[0].username);
+  Object.assign(user, updates);
+  console.log(user);
   return res.status(200).json(user);
 });
 

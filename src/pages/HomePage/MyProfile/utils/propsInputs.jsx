@@ -1,41 +1,3 @@
-export const inputsLogin = [
-  {
-    id: 1,
-    name: "Carne",
-    type: "text",
-    placeholder: "Carne",
-    label: "Usuario",
-    conditions: function (values, errorMessage) {
-      let error = "";
-      if (values == "") {
-        error = "Complete este campo";
-      } else if (!RegExp("^[0-9]+$").test(values)) {
-        error = "Solo se permiten numeros";
-      } else if (errorMessage == "Carne no encontrado") {
-        error = errorMessage;
-      }
-      return error;
-    },
-  },
-  {
-    id: 2,
-    name: "Password",
-    type: "password",
-    placeholder: "Contraseña",
-    label: "Contraseña",
-    conditions: function (values, errorMessage) {
-      let error = "";
-      if (values == "") {
-        error = "Complete este campo";
-      } else if (!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])?[A-Za-z\\d!@#$%^&*]{8,}$").test(values)) {
-        error = "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un numero";
-      } else if (errorMessage == "Contraseña incorrecta") {
-        error = errorMessage;
-      }
-      return error;
-    },
-  },
-];
 export const inputsSignUp = [
   {
     id: 1,
@@ -47,7 +9,7 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;
@@ -63,34 +25,15 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;
     },
   },
+
   {
     id: 3,
-    name: "Carne",
-    type: "text",
-    placeholder: "Carne",
-    label: "Carne",
-    conditions: function (values, errorMessage) {
-      let error = "";
-      if (values == "") {
-        error = "Complete este campo";
-      } else if (!RegExp("^[0-9]+$").test(values)) {
-        error = "Solo se permiten numeros";
-      } else if (!RegExp("^[0-9]{7,}$").test(values)) {
-        error = "El carne debe tener 7 digitos";
-      } else if (errorMessage == "Carne ya registrado") {
-        error = errorMessage;
-      }
-      return error;
-    },
-  },
-  {
-    id: 4,
     name: "Gender",
     type: "text",
     placeholder: "Genero",
@@ -106,7 +49,7 @@ export const inputsSignUp = [
     },
   },
   {
-    id: 5,
+    id: 4,
     name: "Faculty",
     type: "text",
     placeholder: "Facultad",
@@ -115,15 +58,15 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;
     },
   },
-  //^[A-Za-z ]+$
+
   {
-    id: 6,
+    id: 5,
     name: "Career",
     type: "text",
     placeholder: "Carrera",
@@ -132,14 +75,14 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;
     },
   },
   {
-    id: 7,
+    id: 6,
     name: "Email",
     type: "email",
     placeholder: "Correo Electronico",
@@ -159,7 +102,7 @@ export const inputsSignUp = [
     },
   },
   {
-    id: 8,
+    id: 7,
     name: "Password",
     type: "Password",
     placeholder: "Contraseña",
