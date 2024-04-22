@@ -11,16 +11,9 @@ import { createContext, useContext, useState, useEffect } from "react";
 const PostContext = createContext();
 export const UsePostContext = () => useContext(PostContext);
 
-export const User = {
-  Uuid: "1c51596b-21fc-419b-afaa-6485fa42b44b",
-  Carne: "12024",
-  Name: "David Augusto",
-  LastName: "Maldonado Hurtarte",
-  Faculty: "ingenieria",
-  Career: "Ingenieria en Ciencieas y Sistemas",
-  Email: "ipc11s2024@gmail.com",
-  Password: "@dminIPC1",
-  Role: "admin",
+export const useUser = () => {
+  const { SessionState } = useAuth();
+  return SessionState.User;
 };
 
 export default function HomePage() {

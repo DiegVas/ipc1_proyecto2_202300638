@@ -26,10 +26,7 @@ authRouter.post("/auth/login", (req, res) => {
     return res.status(409).send();
   }
 
-  const userWithoutPassword = { ...user };
-  delete userWithoutPassword.Password;
-  console.log(userWithoutPassword);
-  return res.status(200).json(userWithoutPassword);
+  return res.status(200).json(user);
 });
 
 //Crear un usuario
@@ -69,6 +66,7 @@ authRouter.delete("/auth/:Uuid", (req, res) => {
 });
 
 authRouter.put("/auth/:Uuid", (req, res) => {
+  console.clear();
   const { Uuid } = req.params;
   const updates = req.body;
 
@@ -83,15 +81,16 @@ authRouter.put("/auth/:Uuid", (req, res) => {
 
   posts.forEach((post) => {
     post.comments.forEach((comment) => {
-      if (comment.username === user.Name) {
+      console.log("Goa");
+      if (comment.username == user.Name) {
         comment.username = updates.Name;
+        console.log(updates.Name);
       }
     });
   });
 
-  console.log(posts[0].username);
+  console.log(posts);
   Object.assign(user, updates);
-  console.log(user);
   return res.status(200).json(user);
 });
 

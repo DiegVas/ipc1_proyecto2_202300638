@@ -6,7 +6,7 @@ import { useState } from "react";
 import HashtagInput from "./components/HashtagInput";
 import ImageUpload from "./components/ImageUpload";
 import { UsePostContext } from "../Homepage";
-import { User } from "../Homepage";
+import { useUser } from "../Homepage";
 import Switch from "react-switch";
 
 const convertBase64 = (file) => {
@@ -23,6 +23,7 @@ const convertBase64 = (file) => {
 };
 
 function Posts({ clseModal }) {
+  const User = useUser();
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [hashtags, setHashtags] = useState([]);

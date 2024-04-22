@@ -4,12 +4,22 @@
 import FormInput from "./FormInput";
 import { inputsSignUp } from "../utils/propsInputs";
 import { validateForm } from "../utils/ValidateForm";
-import { User } from "../../Homepage";
+import { useUser } from "../../Homepage";
+import { useAuth } from "../../../../Routes/Routes";
 
 function FormSignUp({ getter, setter }) {
+  const { setSessionState, SessionState } = useAuth();
+  const User = useUser();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await validateForm(getter, inputsSignUp, setter, `http://localhost:3000/auth/${User.Uuid}`);
+    const response = await validateForm(
+      getter,
+      inputsSignUp,
+      setter,
+      `http://localhost:3000/auth/${User.Uuid}`,
+      setSessionState,
+      SessionState
+    );
   };
 
   const onChange = (e) => {

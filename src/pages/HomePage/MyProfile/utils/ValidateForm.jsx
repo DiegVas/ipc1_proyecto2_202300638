@@ -1,4 +1,4 @@
-export const validateForm = (getter, inputs, setter, url) => {
+export const validateForm = (getter, inputs, setter, url, setSessionState) => {
   let validity = {};
   for (let key in getter) {
     const input = inputs.find((input) => input.name == key);
@@ -22,7 +22,7 @@ export const validateForm = (getter, inputs, setter, url) => {
       },
       body: JSON.stringify(dataToSend),
     });
-
+    setSessionState((prevState) => ({ ...prevState, User: { ...prevState.User, ...dataToSend } }));
     return response;
   }
 };

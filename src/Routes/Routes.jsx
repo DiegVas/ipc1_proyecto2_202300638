@@ -29,7 +29,10 @@ const AuthRoute = ({ children }) => {
 };
 
 export default function RoutesNavigator() {
-  const [SessionState, setSessionState] = useState({ User: {}, State: false });
+  const [SessionState, setSessionState] = useState({
+    User: {},
+    State: false,
+  });
 
   const loginState = (User) => setSessionState({ User: User, State: true });
 
@@ -37,14 +40,14 @@ export default function RoutesNavigator() {
 
   return (
     <div className="w-full h-full">
-      <AuthConetext.Provider value={{ SessionState, loginState, logoutState }}>
+      <AuthConetext.Provider value={{ SessionState, loginState, logoutState, setSessionState }}>
         <Routes>
           <Route
             path=""
             element={
-              // <ProtectedRoute>
-              <HomePage />
-              //  </ProtectedRoute>
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
             }
           >
             <Route path="/" element={<Feed />}></Route>

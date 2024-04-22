@@ -6,12 +6,13 @@ import Post from "./components/Post";
 import Modal from "react-modal";
 import Posts from "../Post/Posts";
 import { useState } from "react";
-import { UsePostContext, User } from "../Homepage";
+import { UsePostContext, useUser } from "../Homepage";
 import FeedFilter from "./components/FeedFilter";
 
 Modal.setAppElement("#root");
 
 export default function Feed() {
+  const User = useUser();
   const [filterFeed, setFilterFeed] = useState([true, false]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { postState } = UsePostContext();
