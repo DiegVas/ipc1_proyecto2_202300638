@@ -1,16 +1,30 @@
 /* eslint-disable react/prop-types */
 
-import "./Styles/Post.css";
-import "./Styles/Post_Comments.css";
+import "../Styles/Post.css";
+import "../Styles/Post_Comments.css";
 import { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 
-export default function Post({ tweet, hashtags, name, career, faculty, date, image, anonymous }) {
-  const [likes, setLikes] = useState(0);
+export default function Post({
+  tweet,
+  hashtags,
+  career,
+  faculty,
+  date,
+  image,
+  anonymous,
+  Uuid,
+  likes,
+  likedBy,
+  comments,
+  User,
+  name,
+}) {
+  const [likesState, setLikesState] = useState(0);
   const [liked, setLiked] = useState(false);
-  const [comments, setComments] = useState([]);
+  const [commentState, setCommentState] = useState([]);
   const [currentComment, setCurrentComment] = useState("");
   const [showComments, setShowComments] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("");
@@ -18,37 +32,64 @@ export default function Post({ tweet, hashtags, name, career, faculty, date, ima
   useEffect(() => {
     const getRandomPastelColor = () => {
       const hue = Math.floor(Math.random() * 360);
-      const saturation = 80 + Math.random() * 20; // 80-100
-      const lightness = 85 + Math.random() * 15; // 85-100
+      const saturation = 80 + Math.random() * 20;
+      const lightness = 85 + Math.random() * 15;
       return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
     };
+    setLikesState(likes);
+    setCommentState(comments);
+    setLiked(likedBy.includes(User.Uuid));
 
     setBackgroundColor(getRandomPastelColor());
-  }, []);
+  }, [User.Uuid, likedBy, likes, comments, commentState]);
 
   const postStyle = {
     backgroundColor: backgroundColor,
   };
 
-  const handleLike = () => {
-    if (liked) {
-      setLikes(likes - 1);
-    } else {
-      setLikes(likes + 1);
+  const handleLike = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/posts/${Uuid}/like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ liked, userUuid: User.Uuid }),
+      });
+      if (!response.ok) throw new Error("Error al dar like al post");
+      setLikesState(liked ? likesState - 1 : likesState + 1);
+      setLiked(!liked);
+    } catch (error) {
+      console.error(error);
     }
-    setLiked(!liked);
   };
 
-  const handleCommentSubmit = () => {
-    const trimmedComment = currentComment.trim();
+  const handleCommentSubmit = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/posts/${Uuid}/comments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: currentComment, username: User.Name }),
+      });
 
-    if (!trimmedComment) {
-      alert("El comentario no puede estar vacío");
-      return;
+      if (!response.ok) {
+        throw new Error("Error al enviar el comentario");
+      }
+
+      const trimmedComment = currentComment.trim();
+
+      if (!trimmedComment) {
+        alert("El comentario no puede estar vacío");
+        return;
+      }
+
+      setCommentState([...commentState, { username: User.Name, text: trimmedComment }]);
+      setCurrentComment("");
+    } catch (error) {
+      console.error(error);
     }
-
-    setComments([...comments, { username: name, text: trimmedComment }]);
-    setCurrentComment("");
   };
 
   const toggleComments = () => {
@@ -89,7 +130,7 @@ export default function Post({ tweet, hashtags, name, career, faculty, date, ima
             Comentar
           </button>
           <button onClick={handleLike} className={liked ? "like" : ""}>
-            {liked ? <FaHeart /> : <FaRegHeart />} {likes}
+            {liked ? <FaHeart /> : <FaRegHeart />} {likesState}
           </button>
         </nav>
       </div>
@@ -105,9 +146,9 @@ export default function Post({ tweet, hashtags, name, career, faculty, date, ima
           <button onClick={handleCommentSubmit}>Enviar comentario</button>
         </div>
         <section>
-          {comments.map((comment, index) => (
+          {commentState.map((commentIn, index) => (
             <p key={index}>
-              <strong>{comment.username}:</strong> {comment.text}
+              <strong>{commentIn.username}:</strong> {commentIn.text}
             </p>
           ))}
         </section>

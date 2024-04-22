@@ -6,20 +6,22 @@ import { useState } from "react";
 import HashtagInput from "./components/HashtagInput";
 import ImageUpload from "./components/ImageUpload";
 import { UsePostContext } from "../Homepage";
+import { User } from "../Homepage";
 import Switch from "react-switch";
-import { Base64 } from "js-base64";
 
-const user = {
-  Career: "Ingeniería en Sistemas",
-  Carne: "202112345",
-  Email: "usuario@gmail.com",
-  Faculty: "Facultad de Ingeniería",
-  Gender: "Femenino",
-  LastName: "Pérez",
-  Name: "María",
-  Password: "ContraseñaSegura123",
-  Uuid: "2c3eedf5-0daf-4993-95e6-39d26b9a36b6",
+const convertBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
 };
+
 function Posts({ clseModal }) {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
@@ -36,28 +38,21 @@ function Posts({ clseModal }) {
       return;
     }
 
-    let base64Image = image;
-    if (image) {
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onload = function () {
-        base64Image = reader.result;
-      };
-      reader.onerror = function (error) {
-        console.log("Error: ", error);
-      };
-    }
+    const base64 = image && (await convertBase64(image));
 
     const newPost = {
       tweet: content,
       hashtags: hashtags,
-      name: `${user.Name} ${user.LastName}`,
-      career: user.Career,
-      faculty: user.Faculty,
+      name: `${User.Name} ${User.LastName}`,
+      career: User.Career,
+      faculty: User.Faculty,
       date: new Date().toISOString(),
-      image: base64Image,
+      image: base64,
       anonymous: isAnonymous,
-      comment: [],
+      comments: [],
+      likes: 0,
+      commntesNumber: 0,
+      likedBy: [],
     };
 
     try {

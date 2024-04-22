@@ -24,6 +24,38 @@ postRouter.post("/posts", (req, res) => {
   return res.status(200).json({ ...req.body, Uuid: Uuid });
 });
 
+postRouter.post("/posts/:Uuid/like", (req, res) => {
+  console.clear();
+  const { Uuid } = req.params;
+  const post = posts.find((post) => post.Uuid === Uuid);
+  if (!post) return res.status(404).send();
+
+  if (!req.body.liked) {
+    post.likedBy.push(req.body.userUuid);
+    post.likes = post.likes + 1;
+  } else {
+    const index = post.likedBy.indexOf(req.body.userUuid);
+    if (index > -1) {
+      post.likedBy.splice(index, 1);
+      post.likes = post.likes - 1;
+    }
+  }
+  console.log(posts);
+  return res.status(200).json(post);
+});
+
+postRouter.post("/posts/:Uuid/comments", (req, res) => {
+  const { Uuid } = req.params;
+  const post = posts.find((post) => post.Uuid === Uuid);
+  if (!post) return res.status(404).send();
+  post.comments.push(req.body);
+  post.commentsNumber = post.commnetsNumber + 1;
+
+  console.log(posts);
+
+  return res.status(200).json(post);
+});
+
 postRouter.delete("/posts/:Uuid", (req, res) => {});
 
 export default postRouter;

@@ -4,10 +4,13 @@ import ExpressServer from "express";
 import authRouter from "./Routes/auth.js";
 import cors from "cors";
 import postsRouter from "./Routes/Posts.js";
-import { comment } from "postcss";
+import bodyParser from "body-parser";
 
 const PORT = 3000;
 const app = ExpressServer();
+
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 export const users = [
   {
@@ -35,6 +38,7 @@ export const posts = [
     likes: 0,
     commnetsNumber: 0,
     anonymous: false,
+    likedBy: [],
   },
 ];
 
