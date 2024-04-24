@@ -4,7 +4,6 @@ import { v4 } from "uuid";
 
 const postRouter = express.Router();
 postRouter.use(express.json());
-
 postRouter.get("/posts", (req, res) => {
   return res.status(200).json(posts);
 });

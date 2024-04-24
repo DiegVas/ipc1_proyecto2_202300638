@@ -23,7 +23,6 @@ export default function Feed() {
   return (
     <div className="Feed">
       <nav>
-        <FeedFilter text="Recientes" active={filterFeed[0]} setFilterFeed={setFilterFeed} filterFeed={filterFeed} />
         <FeedFilter text="Populares" active={filterFeed[1]} setFilterFeed={setFilterFeed} filterFeed={filterFeed} />
       </nav>
       {filterFeed[0] ? RecentFeed(postState, User) : PopularFeed(postState, User)}

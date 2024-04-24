@@ -7,6 +7,7 @@ import Feed from "../pages/HomePage/Feed/Feed";
 import MyPosts from "../pages/HomePage/MyPosts/MyPosts";
 import Liked from "../pages/HomePage/Liked/Liked";
 import MyProfile from "../pages/HomePage/MyProfile/MyProfile";
+import AdminPage from "../pages/AdminPage/AdminPage";
 
 const AuthConetext = createContext();
 
@@ -20,9 +21,19 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+const AdminRoute = ({ children }) => {
+  const { SessionState } = useAuth();
+  if (SessionState.User.Role != "admin") {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
 const AuthRoute = ({ children }) => {
   const { SessionState } = useAuth();
-  if (SessionState.State) {
+  if (SessionState.User.Role == "admin") {
+    return <Navigate to="/admin" replace />;
+  } else if (SessionState.State) {
     return <Navigate to="/" replace />;
   }
   return children;
@@ -43,11 +54,19 @@ export default function RoutesNavigator() {
       <AuthConetext.Provider value={{ SessionState, loginState, logoutState, setSessionState }}>
         <Routes>
           <Route
+            path="/admin"
+            element={
+              //            <AdminRoute>
+              <AdminPage />
+              //              </AdminRoute>
+            }
+          ></Route>
+          <Route
             path=""
             element={
-              <ProtectedRoute>
-                <HomePage />
-              </ProtectedRoute>
+              //    <ProtectedRoute>
+              <HomePage />
+              //    </ProtectedRoute>
             }
           >
             <Route path="/" element={<Feed />}></Route>

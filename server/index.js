@@ -5,6 +5,7 @@ import authRouter from "./Routes/auth.js";
 import cors from "cors";
 import postsRouter from "./Routes/Posts.js";
 import bodyParser from "body-parser";
+import BoukLoadRouter from "./Routes/BulkLoad.js";
 
 const PORT = 3000;
 const app = ExpressServer();
@@ -31,6 +32,7 @@ export const posts = [
     Uuid: "1c51596b-21fc-419b-afaa-6485fa42b44b",
     tweet: "Hola Mundo",
     hashtags: ["#hola", "#mundo"],
+    carne: "12024",
     image: null,
     comments: [],
     date: new Date().toISOString(),
@@ -46,6 +48,7 @@ app.use(cors());
 app.use(ExpressServer.json());
 app.use(authRouter);
 app.use(postsRouter);
+app.use(BoukLoadRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

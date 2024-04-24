@@ -47,6 +47,7 @@ function Posts({ clseModal }) {
       name: `${User.Name} ${User.LastName}`,
       career: User.Career,
       faculty: User.Faculty,
+      carne: User.Carne,
       date: new Date().toISOString(),
       image: base64,
       anonymous: isAnonymous,

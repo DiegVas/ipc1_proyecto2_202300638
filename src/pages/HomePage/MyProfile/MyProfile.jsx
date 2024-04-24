@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useUser } from "../Homepage";
 import FormSignUp from "./components/FormSignUp";
+import "./Styles/MyProfile.css";
+import { useAuth } from "../../../Routes/Routes";
 
 export default function MyProfile() {
   const User = useUser();
@@ -17,9 +19,14 @@ export default function MyProfile() {
     },
   });
 
+  const { logoutState } = useAuth();
+
   return (
     <div className="form-Home">
-      <FormSignUp getter={valueSignUp} setter={setValueSignUp} />
+      <div>
+        <FormSignUp getter={valueSignUp} setter={setValueSignUp} />
+      </div>
+      <button onClick={logoutState}>Cerra Session</button>
     </div>
   );
 }

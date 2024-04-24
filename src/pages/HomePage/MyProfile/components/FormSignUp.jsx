@@ -6,6 +6,7 @@ import { inputsSignUp } from "../utils/propsInputs";
 import { validateForm } from "../utils/ValidateForm";
 import { useUser } from "../../Homepage";
 import { useAuth } from "../../../../Routes/Routes";
+import { Navigate } from "react-router-dom";
 
 function FormSignUp({ getter, setter }) {
   const { setSessionState, SessionState } = useAuth();
@@ -20,6 +21,7 @@ function FormSignUp({ getter, setter }) {
       setSessionState,
       SessionState
     );
+    <Navigate to="/" replace />;
   };
 
   const onChange = (e) => {
@@ -45,7 +47,9 @@ function FormSignUp({ getter, setter }) {
           isComboBox={input.name == "Gender"}
         />
       ))}
-      <button type="submit">Cambiar datos</button>
+      <button type="submit" className="ChangeData">
+        Cambiar datos
+      </button>
     </form>
   );
 }
