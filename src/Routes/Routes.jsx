@@ -56,17 +56,17 @@ export default function RoutesNavigator() {
           <Route
             path="/admin"
             element={
-              //            <AdminRoute>
-              <AdminPage />
-              //              </AdminRoute>
+              <AdminRoute>
+                <AdminPage />
+              </AdminRoute>
             }
           ></Route>
           <Route
             path=""
             element={
-              //    <ProtectedRoute>
-              <HomePage />
-              //    </ProtectedRoute>
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
             }
           >
             <Route path="/" element={<Feed />}></Route>
