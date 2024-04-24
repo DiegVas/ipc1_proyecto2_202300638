@@ -33,7 +33,7 @@ function FormLogin({ login, getter, setter }) {
       });
     } else if (response && response.status == 200) {
       loginState(await response.json());
-      navigate("/");
+      navigate("");
     }
   };
 

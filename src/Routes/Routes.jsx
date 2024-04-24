@@ -31,6 +31,7 @@ const AdminRoute = ({ children }) => {
 
 const AuthRoute = ({ children }) => {
   const { SessionState } = useAuth();
+  console.log(SessionState.User);
   if (SessionState.User.Role == "admin") {
     return <Navigate to="/admin" replace />;
   } else if (SessionState.State) {
