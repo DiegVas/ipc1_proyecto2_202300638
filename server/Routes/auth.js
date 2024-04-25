@@ -48,7 +48,7 @@ authRouter.post("/auth/signUp", (req, res) => {
     return res.status(409).send();
   }
   const Uuid = v4();
-  users.push({ ...req.body, Uuid: Uuid });
+  users.push({ ...req.body, Uuid: Uuid, Role: "user", Posts: 0, Comments: 0 });
   return res.status(200).json({ ...req.body, Uuid: Uuid });
 });
 

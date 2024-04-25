@@ -24,6 +24,7 @@ export default function Feed() {
     <div className="Feed">
       <nav>
         <FeedFilter text="Populares" active={filterFeed[1]} setFilterFeed={setFilterFeed} filterFeed={filterFeed} />
+        <FeedFilter text="Recientes" active={filterFeed[0]} setFilterFeed={setFilterFeed} filterFeed={filterFeed} />
       </nav>
       {filterFeed[0] ? RecentFeed(postState, User) : PopularFeed(postState, User)}
       <button className="fixed-btn" onClick={openModal}>

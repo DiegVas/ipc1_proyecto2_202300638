@@ -18,6 +18,7 @@ postRouter.post("/posts", (req, res) => {
   }
 
   const Uuid = v4();
+  users.find((user) => user.Carne === req.body.carne).Posts++;
   posts.push({ ...req.body, Uuid: Uuid });
   console.log(posts);
   return res.status(200).json({ ...req.body, Uuid: Uuid });
@@ -47,6 +48,7 @@ postRouter.post("/posts/:Uuid/comments", (req, res) => {
   const { Uuid } = req.params;
   const post = posts.find((post) => post.Uuid === Uuid);
   if (!post) return res.status(404).send();
+  users.find((user) => user.Carne === req.body.carne).Comments++;
   post.comments.push(req.body);
   post.commentsNumber = post.commnetsNumber + 1;
 

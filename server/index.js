@@ -24,6 +24,8 @@ export const users = [
     Email: "ipc11s2024@gmail.com",
     Password: "@dminIPC1",
     Role: "admin",
+    Posts: 1,
+    Comments: 0,
   },
 ];
 

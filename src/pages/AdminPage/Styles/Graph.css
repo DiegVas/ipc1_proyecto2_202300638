@@ -1,0 +1,38 @@
+/* Estilo para la sección de gráficas */
+.graph-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  height: auto !important;
+}
+
+.chart h2 {
+  margin: 20px;
+  font-size: 1.4em;
+  color: #333;
+}
+
+/* Estilo para cada gráfica */
+.graph-section div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 15px;
+  width: 40%;
+  height: auto;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column !important;
+  width: 100% !important;
+  text-align: center;
+  margin: 20px 40px !important;
+}
+.chart.bar {
+  width: 70% !important;
+}

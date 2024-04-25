@@ -16,6 +16,9 @@ BoukLoadRouter.post("/Usermass-upload", (req, res) => {
     Email: user.correo,
     Password: user.contrasenia,
     Gender: user.genero == "M" ? "Masculino" : "Femenino",
+    Role: "user",
+    Posts: 0,
+    Comments: 0,
   }));
   users.push(...newUsers);
   console.log(users);
@@ -23,20 +26,23 @@ BoukLoadRouter.post("/Usermass-upload", (req, res) => {
 });
 
 BoukLoadRouter.post("/Postmass-upload", (req, res) => {
-  const newPosts = req.body.map((post) => ({
-    Uuid: v4(),
-    tweet: post.descripcion,
-    hashtags: [post.categoria],
-    carne: post.codigo.toString(),
-    image: null,
-    comments: [],
-    date: new Date().toISOString(),
-    User: "uuid",
-    likes: 0,
-    commnetsNumber: 0,
-    anonymous: post.anonimo,
-    likedBy: [],
-  }));
+  const newPosts = req.body.map((post) => {
+    users.find((user) => user.Carne == post.codigo.toString()).Posts++;
+    return {
+      Uuid: v4(),
+      tweet: post.descripcion,
+      hashtags: [post.categoria],
+      carne: post.codigo.toString(),
+      image: null,
+      comments: [],
+      date: new Date().toISOString(),
+      User: "uuid",
+      likes: 0,
+      commnetsNumber: 0,
+      anonymous: post.anonimo,
+      likedBy: [],
+    };
+  });
 
   posts.push(...newPosts);
   console.log(posts);
@@ -53,7 +59,11 @@ BoukLoadRouter.get("/getusers", (req, res) => {
     carrera: user.Career,
     correo: user.Email,
     genero: user.Gender == "Masculino" ? "M" : "F",
+    contrasenia: user.Password,
+    posts: user.Posts,
+    comentarios: user.Comments,
   }));
+  console.log(data);
   res.json(data);
 });
 
@@ -63,6 +73,14 @@ BoukLoadRouter.get("/getposts", (req, res) => {
     descripcion: post.tweet,
     categoria: post.hashtags[0],
     anonimo: post.anonymous,
+    uuid: post.Uuid,
+    imagen: post.image,
+    comentarios: post.comments,
+    fecha: post.date,
+    usuario: post.User,
+    likes: post.likes,
+    numeroComentarios: post.commnetsNumber,
+    gustadoPor: post.likedBy,
   }));
   res.json(data);
 });
