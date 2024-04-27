@@ -40,7 +40,7 @@ export default function AdminPage() {
         </button>
       </nav>
       {activeTab == "users" ? (
-        <Visualidity users={users} posts={posts} />
+        <Visualidity users={users} posts={posts} setUsers={setUsers} setPosts={setPosts} />
       ) : activeTab == "graph" ? (
         <Graphs users={users} posts={posts} />
       ) : (

@@ -12,9 +12,6 @@ export default function HeaderPage() {
         <li>
           <a href="">Contacto</a>
         </li>
-        <li>
-          <a href="">Desarollador</a>
-        </li>
       </nav>
     </header>
   );

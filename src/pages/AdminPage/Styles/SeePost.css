@@ -1,0 +1,27 @@
+.postSee {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 95%;
+  overflow: auto;
+}
+
+.postSee-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.postSee p {
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+
+.postSee-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}

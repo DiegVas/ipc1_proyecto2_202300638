@@ -9,8 +9,6 @@ export const validateForm = (getter, inputs, setter, url) => {
   setter(validity);
   let hasErrors = Object.values(validity).some((input) => input.errorMessage !== "");
 
-  console.log(hasErrors);
-
   if (!hasErrors) {
     const dataToSend = {};
     for (let key in getter) {

@@ -64,7 +64,19 @@ BoukLoadRouter.get("/getusers", (req, res) => {
     comentarios: user.Comments,
   }));
   console.log(data);
-  res.json(data);
+  return res.json(data);
+});
+
+BoukLoadRouter.delete("/deleteuser/:codigo", (req, res) => {
+  const codigo = req.params.codigo;
+  const index = users.findIndex((user) => user.Carne === codigo);
+
+  if (index !== -1) {
+    users.splice(index, 1);
+    return res.status(200).send({ message: "Usuario eliminado exitosamente" });
+  } else {
+    return res.status(404).send({ message: "Usuario no encontrado" });
+  }
 });
 
 BoukLoadRouter.get("/getposts", (req, res) => {
@@ -82,7 +94,21 @@ BoukLoadRouter.get("/getposts", (req, res) => {
     numeroComentarios: post.commnetsNumber,
     gustadoPor: post.likedBy,
   }));
-  res.json(data);
+  return res.json(data);
+});
+
+BoukLoadRouter.delete("/deletepost/:codigo", (req, res) => {
+  console.log(req.params);
+  const carne = req.params.codigo;
+  console.log(carne);
+  const index = posts.findIndex((post) => post.carne === carne);
+
+  if (index !== -1) {
+    posts.splice(index, 1);
+    return res.status(200).send({ message: "Post eliminado exitosamente" });
+  } else {
+    return res.status(404).send({ message: "Post no encontrado" });
+  }
 });
 
 export default BoukLoadRouter;

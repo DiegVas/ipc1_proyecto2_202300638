@@ -27,9 +27,7 @@ export default function Feed() {
         <FeedFilter text="Recientes" active={filterFeed[0]} setFilterFeed={setFilterFeed} filterFeed={filterFeed} />
       </nav>
       {filterFeed[0] ? RecentFeed(postState, User) : PopularFeed(postState, User)}
-      <button className="fixed-btn" onClick={openModal}>
-        +
-      </button>
+      <button className="fixed-btn" onClick={openModal}></button>
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="FormModal">
         <Posts clseModal={closeModal} />
       </Modal>
