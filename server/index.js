@@ -29,22 +29,7 @@ export const users = [
   },
 ];
 
-export const posts = [
-  {
-    Uuid: "1c51596b-21fc-419b-afaa-6485fa42b44b",
-    tweet: "Hola Mundo",
-    hashtags: ["#hola", "#mundo"],
-    carne: "12024",
-    image: null,
-    comments: [],
-    date: new Date().toISOString(),
-    User: "uuid",
-    likes: 0,
-    commnetsNumber: 0,
-    anonymous: false,
-    likedBy: [],
-  },
-];
+export const posts = [];
 
 app.use(cors());
 app.use(ExpressServer.json());
