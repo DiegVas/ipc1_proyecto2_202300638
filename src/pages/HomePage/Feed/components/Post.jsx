@@ -71,7 +71,7 @@ export default function Post({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text: currentComment, username: User.Name }),
+        body: JSON.stringify({ text: currentComment, username: User.Name, carne: User.Carne }),
       });
 
       if (!response.ok) {

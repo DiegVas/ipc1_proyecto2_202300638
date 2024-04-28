@@ -1,0 +1,55 @@
+.ContactUs {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  font-family: "Lato", sans-serif;
+}
+
+.ContactUs h1 {
+  font-weight: bold !important;
+  font-size: 20px;
+  color: #4f6fad;
+}
+
+.ContactUs p {
+  color: #555;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.ContactUs form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 510px;
+}
+
+.ContactUs label {
+  color: #4f6fad;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.ContactUs input,
+.ContactUs textarea {
+  border: 1px solid #ccc;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.ContactUs button {
+  background-color: #4f6fad;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.ContactUs button:hover {
+  background-color: #3e5a85;
+}

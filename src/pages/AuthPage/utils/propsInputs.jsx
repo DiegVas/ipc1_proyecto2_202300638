@@ -27,8 +27,6 @@ export const inputsLogin = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])?[A-Za-z\\d!@#$%^&*]{8,}$").test(values)) {
-        error = "La contraseña debe tener al menos 8 caracteres, una letra mayuscula, una letra minuscula y un numero";
       } else if (errorMessage == "Contraseña incorrecta") {
         error = errorMessage;
       }
@@ -47,7 +45,7 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;
@@ -63,7 +61,7 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;
@@ -115,7 +113,7 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;
@@ -132,7 +130,7 @@ export const inputsSignUp = [
       let error = "";
       if (values == "") {
         error = "Complete este campo";
-      } else if (!RegExp("^[A-Za-z]+$").test(values)) {
+      } else if (!RegExp("^[A-Za-z ]+$").test(values)) {
         error = "Solo se permiten letras";
       }
       return error;

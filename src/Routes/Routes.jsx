@@ -8,6 +8,9 @@ import MyPosts from "../pages/HomePage/MyPosts/MyPosts";
 import Liked from "../pages/HomePage/Liked/Liked";
 import MyProfile from "../pages/HomePage/MyProfile/MyProfile";
 import AdminPage from "../pages/AdminPage/AdminPage";
+import Contact from "../pages/AuthPage/components/contact";
+import Aboutus from "../pages/AuthPage/components/Aboutus";
+import AuthLogin from "../pages/AuthPage/components/AuthLogin";
 
 const AuthConetext = createContext();
 
@@ -57,26 +60,25 @@ export default function RoutesNavigator() {
           <Route
             path="/admin"
             element={
-              //   <AdminRoute>
-              <AdminPage />
-              //     </AdminRoute>
+              <AdminRoute>
+                <AdminPage />
+              </AdminRoute>
             }
           ></Route>
           <Route
             path=""
             element={
-              //   <ProtectedRoute>
-              <HomePage />
-              //     </ProtectedRoute>
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
             }
           >
-            <Route path="/" element={<Feed />}></Route>
+            <Route path="/" element={<Feed />} />
             <Route path="MyPosts" element={<MyPosts />} />
             <Route path="Liked" element={<Liked />} />
             <Route path="MyProfile" element={<MyProfile />} />
             <Route path="*" element={<h1>404</h1>} />
           </Route>
-          ;
           <Route
             path="/auth"
             element={
@@ -84,8 +86,11 @@ export default function RoutesNavigator() {
                 <AuthPage />
               </AuthRoute>
             }
-          />
-          ;
+          >
+            <Route path="Contact" element={<Contact />} />
+            <Route path="Aboutus" element={<Aboutus />} />
+            <Route path="" element={<AuthLogin />} />
+          </Route>
           <Route path="*" element={<h1>404</h1>} />;
         </Routes>
       </AuthConetext.Provider>

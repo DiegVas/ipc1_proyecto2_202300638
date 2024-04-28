@@ -53,7 +53,6 @@ postRouter.post("/posts/:Uuid/comments", (req, res) => {
   post.commentsNumber = post.commnetsNumber + 1;
 
   console.log(posts);
-
   return res.status(200).json(post);
 });
 
